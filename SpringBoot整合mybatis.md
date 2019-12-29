@@ -191,3 +191,53 @@ public class Department {
 ## 一：使用注解版
 
 ## 1.创建mapper接口
+
+        //指定这是一个操作数据库的mapper(必须要配置不然无法进行数据库的操作)
+        //@Mapper 每个进行操作的表都要添加注解，这样会很不方便，可以在主程序下添加MapperScan
+        @Mapper
+        public interface DepartmentMapper {
+
+            @Select("select * from department where id=#{id}")
+            public Department getDeptById(Integer id);
+
+            @Delete("delete from department where id=#{id}")
+            public int deleteDeptById(Integer id);
+
+            //返回的时候无法显示封装的自增属性，需要加注解Options
+            @Options(useGeneratedKeys = true,keyProperty = "id")
+            //因为建表的时候设置id是自增的，所以只需要插入departmentName就行
+            @Insert("insert into department(department_name) values(#{departmentName})")
+            public int insertDept(Department department);
+
+            @Update("update department set department_name=#{departmentName} where id=#{id}")
+            public int updateDept(Department department);
+        }
+## 2.创建Controller类
+        @RestController
+        public class DeptController {
+
+            @Autowired
+            DepartmentMapper departmentMapper;
+
+            @GetMapping("/dept/{id}")
+            public Department getDepartment(@PathVariable("id")Integer id){
+                return departmentMapper.getDeptById(id);
+            }
+
+            @GetMapping("/dept")
+            public Department insertDepartment(Department department){
+                departmentMapper.insertDept(department);
+                return department;
+            }
+
+            @GetMapping("/dept/delete/{id}")
+            public String deleteDepartment(@PathVariable("id") Integer id){
+                departmentMapper.deleteDeptById(id);
+               return "delete id="+id+" success";
+            }
+        }
+        
+
+## 3.访问：http://localhost:8080/dept?departmentName=AA 添加一条数据
+
+## 访问：http://localhost:8080/dept/1 获取数据
