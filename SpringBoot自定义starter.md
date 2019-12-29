@@ -1,6 +1,3 @@
-# SpringBoot
-学习SpringBoot时的一些笔记
+# SpringBoot自定义starter笔记
 
-    欢迎到访  
-    很高兴见到您  
-    祝您，早上好，中午好，下午好，晚安  
+[学习笔记](https://cloudlandboy.github.io/myNote/#/backend/springboot/customizestarter)
