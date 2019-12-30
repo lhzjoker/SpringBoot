@@ -13,7 +13,7 @@
     是spring-boot-06-data-mybatis的笔记
     spring-boot-06-data-mybatis是源代码
     
-## 4.[SpringBoot整合jpa.md](https://github.com/lhzjoker/SpringBoot/edit/master/SpringBoot%E6%95%B4%E5%90%88jpa.md)
+## 4.[SpringBoot整合jpa.md](https://github.com/lhzjoker/SpringBoot/blob/master/SpringBoot%E6%95%B4%E5%90%88jpa.md)
         是spring-boot-06-data-jpa的笔记
         spring-boot-06-data-jpa是源代码
        
