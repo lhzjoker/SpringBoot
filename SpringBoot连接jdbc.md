@@ -52,7 +52,7 @@
         driver-class-name: com.mysql.cj.jdbc.Driver
         
         
-## 3.测试连接
+## 测试连接
 
 * 在测试类中测试
 
