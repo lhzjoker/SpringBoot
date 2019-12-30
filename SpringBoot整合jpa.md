@@ -10,6 +10,7 @@
   
 
 ## 导入依赖
+
 <details>
     <summary>pom.xml</summary>
     <pre><code>
@@ -52,15 +53,23 @@
 
 ## JpaRepository
 
-  /**
-   * 继承JpaRepository来完成对数据库的操作
-   * 泛型是（实体类，主键）
-   */
-  public interface UserRepository extends JpaRepository<User,Integer>{
-  }
+
+/**
+
+*继承JpaRepository来完成对数据库的操作
+
+*泛型是（实体类，主键）
+
+*/
+
+public interface UserRepository extends JpaRepository<User,Integer>
+{
+
+}
       
      
 ## 实体类
+
 <details>
     <summary>User</summary>
     <pre><code>
@@ -106,6 +115,7 @@ public class User {
 
 
 ## 配置文件
+
 <details>
     <summary>application.yml</summary>
     <pre><code>
@@ -152,6 +162,7 @@ public class User {
 
 
 ## 实现
+
 * 添加User，访问：
 
 http://localhost:8080/user?lastName=zhangsan&email=AA
@@ -165,15 +176,26 @@ http://localhost:8080/user/1
 
 
 ### 解决办法
+
 * 1.关闭懒加载，在实体类上加@Proxy(lazy = false)注解
+
+
+   @Entity
+   
+   @Table(name = "tbl_user")
+   
+   @Proxy(lazy = false)
+   
+   public class User
+   
   
-  @Entity
-  @Table(name = "tbl_user")
-  @Proxy(lazy = false)
-  public class User
 * 2.转json的时候忽略hibernateLazyInitializer和handler属性
 
-  @Entity
-  @Table(name = "tbl_user")
-  @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-  public class User 
+    @Entity
+    
+    @Table(name = "tbl_user")
+    
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+    
+    public class User 
+    
