@@ -13,7 +13,7 @@
         + 2.[创建Controller类](#创建Controller类)
         + 3.[Mybatis配置](#Mybatis配置)
         + 4.[Mapper扫描](#Mapper扫描)
-    - 2.[使用xml配置整合mybatis](使用xml配置整合mybatis)
+    - 2.[使用xml配置整合mybatis](#使用xml配置整合mybatis)
         + 1.[创建mybatis配置文件](#创建mybatis配置文件)
         + 2.[创建EmployeeMapper接口](#创建EmployeeMapper接口)
         + 3.[创建EmployMapper.xml映射文件](#创建EmployMapper.xml映射文件)
