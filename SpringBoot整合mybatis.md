@@ -241,3 +241,133 @@ public class Department {
 ## 3.访问：http://localhost:8080/dept?departmentName=AA 添加一条数据
 
 ## 访问：http://localhost:8080/dept/1 获取数据
+
+
+## 4.Mybatis配置
+* 开启驼峰命名法
+
+如果我们的实体类属性和数据表列名一致那么就没什么问题
+但如果是这样departName和depart_name
+
+## 访问：http://localhost:8080/dept/1 获取数据
+        [{"id":1,"departmentName":null}]
+        
+由于列表和属性名不一致，所以就没有封装进去，我们表中的列名和实体类属性名都是遵循驼峰命名规则的，可以开启mybatis的开启驼峰命名配置
+
+
+        mybatis:
+          configuration:
+            map-underscore-to-camel-case: true
+            
+            
+也可以向spring容器中注入配置类MybatisConfig
+
+        //mybatis配置类
+        @Configuration
+        public class MybatisConfig {
+            //设置驼峰命名法
+            @Bean
+           public ConfigurationCustomizer configurationCustomizer(){
+               return new ConfigurationCustomizer() {
+                   @Override
+                   public void customize(org.apache.ibatis.session.Configuration configuration) {
+                       configuration.setMapUnderscoreToCamelCase(true);
+                   }
+               };
+           }
+        }
+        
+
+## 5.Mapper扫描
+
+使用@Mapper的类可以被扫描到容器中，但是每个类都加就会太麻烦了，我们有一个可以扫描整个包的注解@MapperScan,加到Spring启动类上
+
+
+        //这个注解可以扫描到包下的所有mapper
+        @MapperScan(value = "com.atguigu.springboot.mapper")
+        @SpringBootApplication
+        public class SpringBoot06DataMybatisApplication {
+
+            public static void main(String[] args) {
+                SpringApplication.run(SpringBoot06DataMybatisApplication.class, args);
+            }
+
+        }
+        
+        
+# 二丶使用xml配置整合mybatis
+
+## 1.创建mybatis配置文件 mybatis-config.xml
+
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE configuration
+                PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        <configuration>
+                <settings>
+                    <!--开启驼峰命名法-->
+                    <setting name="mapUnderscoreToCamelCase" value="true" />
+                    <setting name="useGeneratedKeys" value="true"/>
+                </settings>
+        </configuration>
+        
+        
+        
+## 2.创建EmployeeMapper接口
+
+
+        public interface EmployeeMapper {
+            public Employee getEmpById(Integer id);
+
+            public void insertEmp(Employee employee);
+        }
+        
+        
+## 3.创建EmployeeMapper.xml映射文件  
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="com.atguigu.springboot.mapper.EmployeeMapper">
+            <!-- public Employee getEmpById(Integer id);
+
+            public void insertEmp(Employee employee); -->
+            <select id="getEmpById" resultType="com.atguigu.springboot.bean.Employee">
+                SELECT * FROM Employee WHERE id=#{id}
+            </select>
+
+            <insert id="insertEmp">
+                INSERT into Employee (lastName,email,gender,d_id) VALUES (#{lastName},#{email},#{gender},#{dId})
+            </insert>
+        </mapper>
+        
+        
+## 4.配置文件(application.yml)指定mybatis配置文件和EmployMapper映射文件的位置
+
+        mybatis:
+          config-location: classpath:mybatis/mybatis-config.xml
+          mapper-locations: classpath:mybatis/mapper/*.xml
+          
+          
+## 5.EmployController
+
+        @RestController
+        public class EmployeeController {
+
+            @Autowired
+            EmployeeMapper employeeMapper;
+
+            @GetMapping("/emp/{id}")
+            public Employee getEmpById(@PathVariable("id") Integer id){
+
+                return employeeMapper.getEmpById(id);
+            }
+
+            @GetMapping("/emp")
+            public Employee insertEmp(Employee employee){
+                employeeMapper.insertEmp(employee);
+                return employee;
+            }
+        }
