@@ -1,7 +1,22 @@
 # springboot连接jdbc数据库并且整合Druid数据源
 
-# 一 连接数据库
-## 1.导入相关依赖
+## 目录
+* 1.[连接jdbc数据库](#连接jdbc数据库)
+    - 1.[导入相关依赖](#导入相关依赖)
+    - 2.[配置数据库连接信息](#配置数据库连接信息)
+    - 3.[测试连接](#测试连接)
+    - 4.[数据库查询数据返回网页](#数据库查询数据返回网页)
+* 1.[整合Druid数据源](#整合Druid数据源)
+    - 1.[导入依赖](#导入依赖)
+    - 2.[配置信息](#配置信息)
+    - 3.[测试类查看使用的数据源](#测试类查看使用的数据源)
+    - 4.[编写一个Druid配置类](#编写一个Druid配置类)
+
+
+
+# 连接jdbc数据库
+
+## 导入相关依赖
 
     <!--导入jdbc相关依赖-->
         <dependency>
@@ -25,7 +40,10 @@
         </dependency>
         
         
-## 2.配置数据库连接信息  application.yml
+## 配置数据库连接信息  
+
+* application.yml
+
     spring:
       datasource:
         username: root
@@ -34,7 +52,10 @@
         driver-class-name: com.mysql.cj.jdbc.Driver
         
         
-## 3.测试有没有连接成功（在测试类中测试）
+## 3.测试连接
+
+* 在测试类中测试
+
     @SpringBootTest
     class SpringBootData06JdbcApplicationTests {
 
@@ -56,7 +77,8 @@
     如果出现com.zaxxer.hikari.HikariDataSource则表示连接成功
     
     
-## 4.数据库查询数据返回网页
+## 数据库查询数据返回网页
+
     @RestController
     public class JdbcController {
 
@@ -73,9 +95,13 @@
 
 [查询](http://localhost:8080/query)  
 
-# 二 整合Druid数据源
 
-## 1.在springboot项目中导入druid数据源依赖[点击查询最新依赖](https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter)
+#  整合Druid数据源
+
+## 导入依赖
+
+* 在springboot项目中导入druid数据源依赖[点击查询最新依赖](https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter)
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -83,7 +109,10 @@
         </dependency>
         
 
-## 2.相关配置信息 application.yml
+## 配置信息
+
+* application.yml
+
         #jdbc的配置
         spring:
           datasource:
@@ -123,7 +152,8 @@
                 allow: 192.168.182.1
 
 
-## 3.测试类查看使用的数据源
+## 测试类查看使用的数据源
+
         @SpringBootTest
         class SpringbootJdbcApplicationTests {
 
@@ -138,7 +168,10 @@
 
         }
         
-## 4.编写一个Druid配置类   DruidConfig
+## 编写一个Druid配置类   
+
+* DruidConfig
+
 * 需要把配置信息从application.yml中加入到容器中
         @ConfigurationProperties(prefix = "spring.datasource")
                 @Bean
