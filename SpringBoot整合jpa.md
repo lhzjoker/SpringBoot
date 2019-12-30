@@ -67,7 +67,9 @@ public interface UserRepository extends JpaRepository<User,Integer>
 
 }
       
-     
+
+
+
 ## 实体类
 
 <details>
@@ -114,6 +116,8 @@ public class User {
 
 
 
+
+
 ## 配置文件
 
 <details>
@@ -133,7 +137,9 @@ public class User {
 </details>
 
 
-    
+
+
+
 ## 创建Controller类
 
 <details>
@@ -161,6 +167,8 @@ public class User {
 </details>
 
 
+
+
 ## 实现
 
 * 添加User，访问：
@@ -175,7 +183,9 @@ http://localhost:8080/user/1
 然后你就会发现抛出500错误，原因是getOne方法使用的懒加载，获取到的只是代理对象，转换为json时会报错
 
 
-### 解决办法
+
+
+## 解决办法
 
 * 1.关闭懒加载，在实体类上加@Proxy(lazy = false)注解
 
