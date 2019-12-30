@@ -173,7 +173,8 @@ public class Department {
 
 ## 配置文件
 
-        * application.yml
+* application.yml
+
             spring:
               datasource:
                 username: root
@@ -330,7 +331,7 @@ public class Department {
 
 ## 创建mybatis配置文件
 
-    * mybatis-config.xml
+* mybatis-config.xml
 
 
             <?xml version="1.0" encoding="UTF-8" ?>
