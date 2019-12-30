@@ -16,9 +16,9 @@
     - 2.[使用xml配置整合mybatis](#使用xml配置整合mybatis)
         + 1.[创建mybatis配置文件](#创建mybatis配置文件)
         + 2.[创建EmployeeMapper接口](#创建EmployeeMapper接口)
-        + 3.[创建EmployeeMapper.xml映射文件](#创建EmployMapper.xml映射文件)
+        + 3.[创建EmployeeMapper.xml映射文件](#创建EmployeeMapper.xml映射文件)
         + 4.[添加配置文件application.yml](#添加配置文件application.yml)
-        + 5.[创建EmployeeContorller类](#创建EmployController类)
+        + 5.[创建EmployeeContorller类](#创建EmployeeController类)
         
 
 
