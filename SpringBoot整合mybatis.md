@@ -3,8 +3,19 @@
 ## 目录
 
 * [引入依赖](#引入依赖)
-
 * [项目构建](#项目构建)
+* [创建实体类](#创建实体类)
+* [配置文件](#配置文件)
+
+* [mybatis增删改查操作](#mybatis增删改查操作)
+    - 1.[使用注解版](#使用注解版)
+        + 1.[创建mapper接口](#创建mapper接口)
+        + 2.[创建Controller类](#创建Controller类)
+        
+* [引入依赖](#引入依赖)
+* [引入依赖](#引入依赖)
+* [引入依赖](#引入依赖)
+
 
 
 
@@ -71,7 +82,9 @@
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
     
-## 3.创建实体类（与数据表对应）
+## 创建实体类
+
+* 与数据表对应
 <details>
 <summary>department</summary>
 <pre><code>
@@ -152,53 +165,55 @@ public class Department {
  </details>
  
 
-## 4.配置文件（application.yml）
-    spring:
-      datasource:
-        username: root
-        password: 980508
-        url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        initialization-mode: always
-        type: com.alibaba.druid.pool.DruidDataSource
-        druid:
-          # 连接池配置
-          # 配置初始化大小、最小、最大
-          initial-size: 1
-          min-idle: 1
-          max-active: 20
-          # 配置获取连接等待超时的时间
-          max-wait: 3000
-          validation-query: SELECT 1 FROM DUAL
-          test-on-borrow: false
-          test-on-return: false
-          test-while-idle: true
-          pool-prepared-statements: true
-          time-between-eviction-runs-millis: 60000
-          min-evictable-idle-time-millis: 300000
-          filters: stat,wall,slf4j
-          # 配置web监控,默认配置也和下面相同(除用户名密码，enabled默认false外)，其他可以不配
-          web-stat-filter:
-            enabled: true
-            url-pattern: /*
-            exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-          stat-view-servlet:
-            enabled: true
-            url-pattern: /druid/*
-            login-username: admin
-            login-password: root
-            allow: 127.0.0.1
-    #    schema:
-    #建表需要注释掉，不然每次程序一运行就会启动
-    #      - classpath:/sql/department.sql
-    #      - classpath:/sql/employee.sql
-    
+## 配置文件
+
+        * application.yml
+            spring:
+              datasource:
+                username: root
+                password: 980508
+                url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                initialization-mode: always
+                type: com.alibaba.druid.pool.DruidDataSource
+                druid:
+                  # 连接池配置
+                  # 配置初始化大小、最小、最大
+                  initial-size: 1
+                  min-idle: 1
+                  max-active: 20
+                  # 配置获取连接等待超时的时间
+                  max-wait: 3000
+                  validation-query: SELECT 1 FROM DUAL
+                  test-on-borrow: false
+                  test-on-return: false
+                  test-while-idle: true
+                  pool-prepared-statements: true
+                  time-between-eviction-runs-millis: 60000
+                  min-evictable-idle-time-millis: 300000
+                  filters: stat,wall,slf4j
+                  # 配置web监控,默认配置也和下面相同(除用户名密码，enabled默认false外)，其他可以不配
+                  web-stat-filter:
+                    enabled: true
+                    url-pattern: /*
+                    exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+                  stat-view-servlet:
+                    enabled: true
+                    url-pattern: /druid/*
+                    login-username: admin
+                    login-password: root
+                    allow: 127.0.0.1
+            #    schema:
+            #建表需要注释掉，不然每次程序一运行就会启动
+            #      - classpath:/sql/department.sql
+            #      - classpath:/sql/employee.sql
+
     
 # mybatis增删改查操作
 
-## 一：使用注解版
+## 使用注解版
 
-## 1.创建mapper接口
+## 创建mapper接口
 
         //指定这是一个操作数据库的mapper(必须要配置不然无法进行数据库的操作)
         //@Mapper 每个进行操作的表都要添加注解，这样会很不方便，可以在主程序下添加MapperScan
@@ -220,7 +235,7 @@ public class Department {
             @Update("update department set department_name=#{departmentName} where id=#{id}")
             public int updateDept(Department department);
         }
-## 2.创建Controller类
+## 创建Controller类
         @RestController
         public class DeptController {
 
@@ -246,12 +261,12 @@ public class Department {
         }
         
 
-## 3.访问：http://localhost:8080/dept?departmentName=AA 添加一条数据
+## 访问：http://localhost:8080/dept?departmentName=AA 添加一条数据
 
 ## 访问：http://localhost:8080/dept/1 获取数据
 
 
-## 4.Mybatis配置
+## Mybatis配置
 * 开启驼峰命名法
 
 如果我们的实体类属性和数据表列名一致那么就没什么问题
@@ -286,7 +301,7 @@ public class Department {
         }
         
 
-## 5.Mapper扫描
+## Mapper扫描
 
 使用@Mapper的类可以被扫描到容器中，但是每个类都加就会太麻烦了，我们有一个可以扫描整个包的注解@MapperScan,加到Spring启动类上
 
@@ -303,9 +318,9 @@ public class Department {
         }
         
         
-# 二丶使用xml配置整合mybatis
+# 使用xml配置整合mybatis
 
-## 1.创建mybatis配置文件 mybatis-config.xml
+## 创建mybatis配置文件 mybatis-config.xml
 
 
         <?xml version="1.0" encoding="UTF-8" ?>
@@ -322,7 +337,7 @@ public class Department {
         
         
         
-## 2.创建EmployeeMapper接口
+## 创建EmployeeMapper接口
 
 
         public interface EmployeeMapper {
@@ -332,7 +347,7 @@ public class Department {
         }
         
         
-## 3.创建EmployeeMapper.xml映射文件  
+## 创建EmployeeMapper.xml映射文件  
 
         <?xml version="1.0" encoding="UTF-8" ?>
         <!DOCTYPE mapper
@@ -352,7 +367,7 @@ public class Department {
         </mapper>
         
         
-## 4.配置文件(application.yml)指定mybatis配置文件和EmployMapper映射文件的位置
+## 配置文件(application.yml)指定mybatis配置文件和EmployMapper映射文件的位置
 
         mybatis:
           config-location: classpath:mybatis/mybatis-config.xml
@@ -379,3 +394,6 @@ public class Department {
                 return employee;
             }
         }
+
+## 程序代码目录结构
+![](https://github.com/lhzjoker/images/raw/master/img-store/QQ图片20191230183257.png) 
