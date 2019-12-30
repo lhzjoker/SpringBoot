@@ -11,10 +11,15 @@
     - 1.[使用注解版](#使用注解版)
         + 1.[创建mapper接口](#创建mapper接口)
         + 2.[创建Controller类](#创建Controller类)
+        + 3.[Mybatis配置](#Mybatis配置)
+        + 4.[Mapper扫描](#Mapper扫描)
+    - 2.[使用xml配置整合mybatis](使用xml配置整合mybatis)
+        + 1.[创建mybatis配置文件](#创建mybatis配置文件)
+        + 2.[创建EmployeeMapper接口](#创建EmployeeMapper接口)
+        + 3.[创建EmployMapper映射文件](#创建EmployMapper映射文件)
+        + 4.[添加配置文件(application.yml)](#添加配置文件(application.yml))
+        + 5.[创建EmployContorller类](#创建EmployContorller类)
         
-* [引入依赖](#引入依赖)
-* [引入依赖](#引入依赖)
-* [引入依赖](#引入依赖)
 
 
 
@@ -235,6 +240,8 @@ public class Department {
             @Update("update department set department_name=#{departmentName} where id=#{id}")
             public int updateDept(Department department);
         }
+        
+        
 ## 创建Controller类
         @RestController
         public class DeptController {
@@ -320,7 +327,9 @@ public class Department {
         
 # 使用xml配置整合mybatis
 
-## 创建mybatis配置文件 mybatis-config.xml
+## 创建mybatis配置文件 
+
+* mybatis-config.xml
 
 
         <?xml version="1.0" encoding="UTF-8" ?>
@@ -367,14 +376,16 @@ public class Department {
         </mapper>
         
         
-## 配置文件(application.yml)指定mybatis配置文件和EmployMapper映射文件的位置
+## 添加配置文件(application.yml)
+
+* 指定mybatis配置文件和EmployMapper映射文件的位置
 
         mybatis:
           config-location: classpath:mybatis/mybatis-config.xml
           mapper-locations: classpath:mybatis/mapper/*.xml
           
           
-## EmployController
+## 创建EmployController类
 
         @RestController
         public class EmployeeController {
@@ -396,4 +407,5 @@ public class Department {
         }
 
 ## 程序代码目录结构
+
 ![](https://github.com/lhzjoker/images/raw/master/img-store/QQ图片20191230183257.png) 
