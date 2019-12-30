@@ -48,7 +48,16 @@
     </code></pre>
 </details>
 
-    
+
+
+## JpaRepository
+
+  /**
+   * 继承JpaRepository来完成对数据库的操作
+   * 泛型是（实体类，主键）
+   */
+  public interface UserRepository extends JpaRepository<User,Integer>{
+  }
       
      
 ## 实体类
@@ -115,3 +124,56 @@ public class User {
 
 
     
+## 创建Controller类
+
+<details>
+    <summary>UserController</summary>
+    <pre><code>
+    @RestController
+    public class UserController {
+
+        @Autowired
+        UserRepository userRepository;
+
+        @GetMapping("/user/{id}")
+        public User getUserById(@PathVariable("id") Integer id){
+            User user= userRepository.getOne(id);       //getOne方法使用的懒加载，获取到的只是代理对象，转换为json时会报错
+            return user;
+        }
+
+        @GetMapping("/user")
+        public User insertUser(User user){
+            User save = userRepository.save(user);      //插入一条数据
+            return save;
+        }
+    }
+    </code></pre>
+</details>
+
+
+## 实现
+* 添加User，访问：
+
+http://localhost:8080/user?lastName=zhangsan&email=AA
+
+http://localhost:8080/user?lastName=lisi&email=BB
+
+* 查询用户访问：
+
+http://localhost:8080/user/1
+然后你就会发现抛出500错误，原因是getOne方法使用的懒加载，获取到的只是代理对象，转换为json时会报错
+
+
+### 解决办法
+* 1.关闭懒加载，在实体类上加@Proxy(lazy = false)注解
+  
+  @Entity
+  @Table(name = "tbl_user")
+  @Proxy(lazy = false)
+  public class User
+* 2.转json的时候忽略hibernateLazyInitializer和handler属性
+
+  @Entity
+  @Table(name = "tbl_user")
+  @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+  public class User 
