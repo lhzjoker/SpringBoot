@@ -16,9 +16,9 @@
     - 2.[使用xml配置整合mybatis](#使用xml配置整合mybatis)
         + 1.[创建mybatis配置文件](#创建mybatis配置文件)
         + 2.[创建EmployeeMapper接口](#创建EmployeeMapper接口)
-        + 3.[创建EmployeeMapper.xml映射文件](#创建EmployeeMapper.xml映射文件)
-        + 4.[添加配置文件application.yml](#添加配置文件application.yml)
-        + 5.[创建EmployeeContorller.java类](#创建EmployeeController.java类)
+        + 3.[创建EmployeeMapper映射文件](#创建EmployeeMapper映射文件)
+        + 4.[添加配置文件](#添加配置文件)
+        + 5.[创建EmployeeContorller类](#创建EmployeeController类)
         
 
 
@@ -357,7 +357,9 @@ public class Department {
         }
         
         
-## 创建EmployeeMapper.xml映射文件
+## 创建EmployeeMapper映射文件
+
+* EmployeeMapper.xml
 
         <?xml version="1.0" encoding="UTF-8" ?>
         <!DOCTYPE mapper
@@ -378,7 +380,9 @@ public class Department {
 
 
 
-# 添加配置文件application.yml
+# 添加配置文件
+
+* application.yml
 
 * 指定mybatis配置文件和EmployMapper映射文件的位置
 
@@ -387,7 +391,7 @@ public class Department {
           mapper-locations: classpath:mybatis/mapper/*.xml
           
           
-## 创建EmployeeController.java类
+## 创建EmployeeController类
 
         @RestController
         public class EmployeeController {
