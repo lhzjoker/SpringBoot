@@ -4,7 +4,7 @@
 * [引入依赖](引入依赖)
 * [EmployController](EmployController)
 
-## 1.引入依赖
+## 引入依赖
     <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -355,7 +355,7 @@ public class Department {
           mapper-locations: classpath:mybatis/mapper/*.xml
           
           
-## 5.EmployController
+## EmployController
 
         @RestController
         public class EmployeeController {
