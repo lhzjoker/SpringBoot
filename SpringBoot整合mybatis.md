@@ -1,8 +1,8 @@
 # SpringBoot整合mybatis
 
 ## 目录
-* [引入依赖](引入依赖)
-* [EmployController](EmployController)
+* [引入依赖](#引入依赖)
+* [EmployController](#EmployController)
 
 ## 引入依赖
     <dependencies>
