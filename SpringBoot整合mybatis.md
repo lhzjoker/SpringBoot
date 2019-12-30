@@ -1,8 +1,12 @@
 # SpringBoot整合mybatis
 
 ## 目录
+
 * [引入依赖](#引入依赖)
-* [EmployController](#EmployController)
+
+* [项目构建](#项目构建)
+
+
 
 ## 引入依赖
     <dependencies>
@@ -47,7 +51,7 @@
 
 ![](https://github.com/lhzjoker/images/raw/master/img-store/1574423628318.png)  
 
-## 2.项目构建
+## 项目构建
 * 在resources下创建department.sql和employee.sql，项目启动时创建表
     DROP TABLE IF EXISTS `department`;
     CREATE TABLE `department` (
