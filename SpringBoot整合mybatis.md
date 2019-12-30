@@ -18,7 +18,7 @@
         + 2.[创建EmployeeMapper接口](#创建EmployeeMapper接口)
         + 3.[创建EmployMapper映射文件](#创建EmployMapper映射文件)
         + 4.[添加配置文件(application.yml)](#添加配置文件(application.yml))
-        + 5.[创建EmployContorller类](#创建EmployContorller类)
+        + 5.[创建EmployContorller类](#创建EmployController类)
         
 
 
@@ -326,24 +326,24 @@ public class Department {
         }
         
         
-# 使用xml配置整合mybatis
+## 使用xml配置整合mybatis
 
 ## 创建mybatis配置文件 
 
-* mybatis-config.xml
+    * mybatis-config.xml
 
 
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <!DOCTYPE configuration
-                PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-                "http://mybatis.org/dtd/mybatis-3-config.dtd">
-        <configuration>
-                <settings>
-                    <!--开启驼峰命名法-->
-                    <setting name="mapUnderscoreToCamelCase" value="true" />
-                    <setting name="useGeneratedKeys" value="true"/>
-                </settings>
-        </configuration>
+            <?xml version="1.0" encoding="UTF-8" ?>
+            <!DOCTYPE configuration
+                    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+            <configuration>
+                    <settings>
+                        <!--开启驼峰命名法-->
+                        <setting name="mapUnderscoreToCamelCase" value="true" />
+                        <setting name="useGeneratedKeys" value="true"/>
+                    </settings>
+            </configuration>
         
         
         
@@ -375,7 +375,7 @@ public class Department {
                 INSERT into Employee (lastName,email,gender,d_id) VALUES (#{lastName},#{email},#{gender},#{dId})
             </insert>
         </mapper>
-        
+
         
 ## 添加配置文件(application.yml)
 
