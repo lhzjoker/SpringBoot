@@ -5,7 +5,7 @@
     是spring-boot-08-starter的笔记
     spring-boot-08-starter是源代码
     
-## 2.[SpringBoot连接jdbc.md](https://github.com/lhzjoker/SpringBoot/blob/master/SpringBoot%E8%87%AA%E5%AE%9A%E4%B9%89starter.md)
+## 2.[SpringBoot连接jdbc.md](https://github.com/lhzjoker/SpringBoot/blob/master/SpringBoot%E8%BF%9E%E6%8E%A5jdbc.md)
     是spring-boot-06-data-jdbc的笔记
     spring-boot-06-data-jdbc是源代码
 
