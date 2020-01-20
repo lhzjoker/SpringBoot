@@ -12,8 +12,8 @@
         - 3.[创建bean实例](#创建bean实例)
         - 4.[创建mapper接口映射数据库](#创建mapper接口映射数据库)
         - 5.[添加注解](#添加注解)
-        - 6.[编写service，来具体实现mapper中的方法](#编写service，来具体实现mapper中的方法)
-        - 7.[创建controller测试](#[创建controller测试)
+        - 6.[编写service来具体实现mapper中的方法](#编写service来具体实现mapper中的方法)
+        - 7.[编写controller测试](#编写controller测试)
         - 8.[测试结果](#测试结果)
 
 ## springboot缓存  
@@ -329,7 +329,7 @@ public class SpringBoot01CacheApplication {
 
 ```
 
-### 编写service，来具体实现mapper中的方法
+### 编写service来具体实现mapper中的方法
 
 将方法的运行结果进行缓存，以后要是再有相同的数据，直接从缓存中获取，不用调用方法
 
