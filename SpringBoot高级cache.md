@@ -5,16 +5,16 @@
 ## 目录
 * 1.[springboot缓存](#springboot缓存)
     - 1.[JSR107缓存规范](#JSR107缓存规范)
-    - [Spring的缓存抽象](#Spring的缓存抽象)
-    - [3、整合项目](#3、整合项目)
-        - [1、导入相关配置](#1、导入相关配置)
-        - [2、配置文件](#2、配置文件)
-        - [3、创建bean实例](#3、创建bean实例)
-        - [4、创建mapper接口映射数据库](#4、创建mapper接口映射数据库)
-        - [5、添加注解](#5、添加注解)
-        - [6、编写service，来具体实现mapper中的方法](#6、编写service，来具体实现mapper中的方法)
-        - [7、创建controller测试](#[7、创建controller测试)
-        - [8、测试结果](#8、测试结果)
+    - 2.[Spring的缓存抽象](#Spring的缓存抽象)
+    - 3.[整合项目](#整合项目)
+        - 1.[导入相关配置](#导入相关配置)
+        - 2.[配置文件](#配置文件)
+        - 3.[创建bean实例](#创建bean实例)
+        - 4.[创建mapper接口映射数据库](#创建mapper接口映射数据库)
+        - 5.[添加注解](#添加注解)
+        - 6.[编写service，来具体实现mapper中的方法](#编写service，来具体实现mapper中的方法)
+        - 7.[创建controller测试](#[创建controller测试)
+        - 8.[测试结果](#测试结果)
 
 ## springboot缓存  
 
@@ -77,11 +77,11 @@ Cache
 | KeyGenerator   | 缓存数据时key生成的策略                                      |
 | serialize      | 缓存数据时value序列化策略                                    |
 
-## 3、整合项目
+## 整合项目
 
 springboot 2.2.3+web+mysql+mybatis+cache
 
-### 1、导入相关配置
+### 导入相关配置
 
         <dependencies>
         		<dependency>
@@ -125,7 +125,7 @@ springboot 2.2.3+web+mysql+mybatis+cache
         		</dependency>
         </dependencies>
         
-### 2、配置文件
+### 配置文件
 
 application.yml
 ```
@@ -152,7 +152,7 @@ logging.level.com.atguigu.mapper = debug
 debug=true
 ```
 
-### 3、创建bean实例
+### 创建bean实例
 
 Department
 ```
@@ -259,7 +259,7 @@ public class Employee {
 
 ```
 
-### 4、创建mapper接口映射数据库
+### 创建mapper接口映射数据库
 DepartmentMapper
 ```
 package com.atguigu.mapper;
@@ -312,7 +312,7 @@ public interface EmployeeMapper {
 
 ```
 
-### 5、添加注解
+### 添加注解
 
 主程序添加注解MapperScan，并且使用@EnableCaching开启缓存
 ```
@@ -329,7 +329,7 @@ public class SpringBoot01CacheApplication {
 
 ```
 
-### 6、编写service，来具体实现mapper中的方法
+### 编写service，来具体实现mapper中的方法
 
 将方法的运行结果进行缓存，以后要是再有相同的数据，直接从缓存中获取，不用调用方法
 
@@ -363,7 +363,7 @@ public class EmployeeService {
 
 ```
 
-### 7、编写controller测试
+### 编写controller测试
 ```
 @RestController
 public class EmployeeController {
@@ -379,5 +379,5 @@ public class EmployeeController {
 }
 ```
 
-### 8、测试结果
+### 测试结果
 第一次访问会查询数据库，继续访问缓存中取值
